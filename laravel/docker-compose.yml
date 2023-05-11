@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+
+  laravel:
+    build: .
+    container_name: 'laravel-${APP_NAME}'
+    volumes:
+      - ./laravel-app:/var/www/html
+    ports:
+      - ${APP_PORT}:80
+  
+  maria:
+    image: mariadb:latest
+    container_name: 'maria-${APP_NAME}'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+    ports:
+    - ${DB_PORT}:3306
